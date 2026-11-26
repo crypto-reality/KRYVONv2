@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#020702">
+<title>KRYVON</title>
+<style>
+*{box-sizing:border-box}
+html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#020702}
+.world{position:fixed;inset:0;overflow:hidden;background:#020702;isolation:isolate}
+.scene{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;object-position:center;z-index:1;transform:scale(1.08);animation:approach 22s cubic-bezier(.35,0,.2,1) infinite alternate}
+.matrix{position:absolute;inset:-100% 0 0;z-index:2;display:flex;justify-content:space-around;gap:1.5vw;overflow:hidden;pointer-events:none;opacity:.44;mix-blend-mode:screen}
+.matrix span{writing-mode:vertical-rl;white-space:pre;font:600 clamp(10px,2vw,18px)/1.45 monospace;letter-spacing:.18em;color:#39ff55;text-shadow:0 0 8px #00ff38;animation:fall var(--duration) linear infinite;animation-delay:var(--delay)}
+.shade{position:absolute;inset:0;z-index:3;pointer-events:none;background:radial-gradient(ellipse at 50% 48%,transparent 25%,rgba(0,0,0,.08) 58%,rgba(0,0,0,.55) 100%)}
+.glow{position:absolute;inset:0;z-index:4;pointer-events:none;background:radial-gradient(ellipse at 50% 52%,rgba(0,255,50,.12),transparent 58%);animation:pulse 4s ease-in-out infinite alternate}
+@keyframes approach{from{transform:scale(1.08)}to{transform:scale(1.34) translate3d(0,-1.5%,0)}}
+@keyframes fall{from{transform:translateY(-18%)}to{transform:translateY(78%)}}
+@keyframes pulse{from{opacity:.25}to{opacity:.8}}
+@media(max-width:700px){.scene{object-position:center center}.matrix{opacity:.3}}
+@media(prefers-reduced-motion:reduce){.scene,.matrix span,.glow{animation:none}}
+</style>
+</head>
+<body>
+<main class="world" aria-label="KRYVON cyber world">
+  <img class="scene" src="./scene.webp" alt="Cyberpunk hooded figure surrounded by green digital code">
+  <div class="matrix" aria-hidden="true">
+    <span style="--duration:13s;--delay:-8s">010101100101101001010110010101010101100101101001010110010101</span>
+    <span style="--duration:17s;--delay:-3s">101001010110010101101001010101011010010101100101011010010101</span>
+    <span style="--duration:11s;--delay:-6s">001011010101100101011010010101011001010110100101010110010101</span>
+    <span style="--duration:19s;--delay:-12s">110100101011001010110100101010110010101101001010101100101011</span>
+    <span style="--duration:14s;--delay:-2s">010110100101011001010110100101010110010101101001010101100101</span>
+    <span style="--duration:16s;--delay:-10s">101011001010110100101010110010101101001010101100101011010010</span>
+    <span style="--duration:12s;--delay:-5s">001010110100101011001010110100101010110010101101001010101100</span>
+    <span style="--duration:18s;--delay:-14s">110010101101001010101100101011010010101011001010110100101010</span>
+    <span style="--duration:15s;--delay:-7s">010101011001010110100101010110010101101001010101100101011010</span>
+    <span style="--duration:20s;--delay:-11s">101101001010101100101011010010101011001010110100101010110010</span>
+    <span style="--duration:13s;--delay:-4s">001101010110010101101001010101100101011010010101011001010110</span>
+    <span style="--duration:17s;--delay:-9s">110101001010110010101101001010101100101011010010101011001010</span>
+  </div>
+  <div class="shade"></div>
+  <div class="glow"></div>
+</main>
+</body>
+</html>
