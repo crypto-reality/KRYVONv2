@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#020702">
+<title>KRYVON</title>
+<style>
+*{box-sizing:border-box}
+html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#020702}
+.world{
+  position:fixed;inset:0;overflow:hidden;background:#020702;
+  isolation:isolate;perspective:900px;
+}
+.scene{
+  position:absolute;inset:0;width:100%;height:100%;display:block;
+  object-fit:cover;object-position:center;z-index:1;
+  transform:scale(1.04);
+  animation:cinematic-entry 28s cubic-bezier(.42,0,.22,1) infinite alternate;
+  will-change:transform;
+}
+/* Digital rain behind the figure */
+.matrix{
+  position:absolute;inset:-110% 0 -20%;z-index:2;
+  display:flex;justify-content:space-around;gap:1.7vw;
+  overflow:hidden;pointer-events:none;mix-blend-mode:screen;
+}
+.matrix span{
+  flex:0 0 auto;writing-mode:vertical-rl;white-space:pre;
+  font:600 clamp(10px,2vw,18px)/1.55 monospace;
+  letter-spacing:.18em;color:#39ff55;
+  text-shadow:0 0 7px #00ff38,0 0 15px rgba(0,255,55,.45);
+  animation:fall var(--duration) linear infinite;
+  animation-delay:var(--delay);opacity:var(--opacity,.55);
+}
+/* A separate, closer layer makes some symbols pass in front of the viewer */
+.matrix-front{
+  position:absolute;inset:-120% -8% -20%;z-index:5;
+  display:flex;justify-content:space-between;gap:4vw;
+  overflow:hidden;pointer-events:none;mix-blend-mode:screen;
+  perspective:500px;
+}
+.matrix-front span{
+  flex:0 0 auto;writing-mode:vertical-rl;white-space:pre;
+  font:700 clamp(13px,2.8vw,24px)/1.45 monospace;
+  letter-spacing:.2em;color:#65ff72;
+  text-shadow:0 0 9px #00ff38,0 0 22px rgba(0,255,55,.7);
+  opacity:var(--opacity,.3);
+  filter:blur(var(--blur,0px));
+  animation:front-fall var(--duration) linear infinite;
+  animation-delay:var(--delay);
+}
+/* Reduced green mist: slow, subtle movement rather than a dense cloud */
+.mist{
+  position:absolute;inset:0;z-index:4;pointer-events:none;
+  opacity:.22;mix-blend-mode:screen;
+  background:
+    radial-gradient(ellipse 42% 17% at 17% 78%,rgba(0,255,45,.24),transparent 72%),
+    radial-gradient(ellipse 38% 15% at 83% 79%,rgba(0,255,45,.2),transparent 72%),
+    radial-gradient(ellipse 50% 13% at 50% 88%,rgba(0,255,45,.16),transparent 75%);
+  filter:blur(18px);
+  animation:mist-drift 19s ease-in-out infinite alternate;
+}
+.shade{
+  position:absolute;inset:0;z-index:6;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 46%,transparent 28%,rgba(0,0,0,.12) 63%,rgba(0,0,0,.58) 100%);
+}
+.glow{
+  position:absolute;inset:0;z-index:7;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 49%,rgba(0,255,50,.07),transparent 57%);
+  animation:pulse 7s ease-in-out infinite alternate;
+}
+@keyframes cinematic-entry{
+  0%{transform:scale(1.04) translate3d(0,0,0)}
+  100%{transform:scale(1.28) translate3d(0,-1.8%,0)}
+}
+@keyframes fall{
+  from{transform:translate3d(0,-12%,0)}
+  to{transform:translate3d(0,82%,0)}
+}
+@keyframes front-fall{
+  from{transform:translate3d(0,-15%,0) scale(1)}
+  to{transform:translate3d(0,85%,0) scale(1.08)}
+}
+@keyframes mist-drift{
+  0%{transform:translate3d(-1.5%,1%,0) scale(1);opacity:.15}
+  50%{transform:translate3d(1%, -1%,0) scale(1.035);opacity:.23}
+  100%{transform:translate3d(2%,1%,0) scale(1.06);opacity:.18}
+}
+@keyframes pulse{from{opacity:.35}to{opacity:.75}}
+@media(max-width:700px){
+  .scene{object-position:center center}
+  .matrix{opacity:.8}
+  .matrix-front{opacity:.8}
+  .mist{opacity:.18;filter:blur(15px)}
+}
+@media(prefers-reduced-motion:reduce){
+  .scene,.matrix span,.matrix-front span,.mist,.glow{animation:none}
+}
+</style>
+</head>
+<body>
+<main class="world" aria-label="KRYVON cyber world">
+  <img class="scene" src="./1000263169.webp" alt="Hooded cyber figure surrounded by green digital code">
+
+  <!-- Distant falling code -->
+  <div class="matrix" aria-hidden="true">
+    <span style="--duration:19s;--delay:-8s;--opacity:.38">010101100101101001010110010101010101100101101001010110010101</span>
+    <span style="--duration:23s;--delay:-3s;--opacity:.48">101001010110010101101001010101011010010101100101011010010101</span>
+    <span style="--duration:17s;--delay:-6s;--opacity:.32">001011010101100101011010010101011001010110100101010110010101</span>
+    <span style="--duration:25s;--delay:-12s;--opacity:.45">110100101011001010110100101010110010101101001010101100101011</span>
+    <span style="--duration:20s;--delay:-2s;--opacity:.35">010110100101011001010110100101010110010101101001010101100101</span>
+    <span style="--duration:22s;--delay:-10s;--opacity:.42">101011001010110100101010110010101101001010101100101011010010</span>
+    <span style="--duration:18s;--delay:-5s;--opacity:.3">001010110100101011001010110100101010110010101101001010101100</span>
+    <span style="--duration:26s;--delay:-14s;--opacity:.4">110010101101001010101100101011010010101011001010110100101010</span>
+    <span style="--duration:21s;--delay:-7s;--opacity:.34">010101011001010110100101010110010101101001010101100101011010</span>
+    <span style="--duration:27s;--delay:-11s;--opacity:.42">101101001010101100101011010010101011001010110100101010110010</span>
+    <span style="--duration:19s;--delay:-4s;--opacity:.3">001101010110010101101001010101100101011010010101011001010110</span>
+    <span style="--duration:24s;--delay:-9s;--opacity:.38">110101001010110010101101001010101100101011010010101011001010</span>
+  </div>
+
+  <!-- Closer code particles passing in front -->
+  <div class="matrix-front" aria-hidden="true">
+    <span style="--duration:14s;--delay:-5s;--opacity:.36;--blur:.4px">010110101001011010010110101</span>
+    <span style="--duration:18s;--delay:-11s;--opacity:.25;--blur:1px">101001011010010101101001</span>
+    <span style="--duration:12s;--delay:-2s;--opacity:.42;--blur:0px">001011010101100101101010</span>
+    <span style="--duration:16s;--delay:-8s;--opacity:.3;--blur:.7px">110101001011010010110100</span>
+    <span style="--duration:13s;--delay:-10s;--opacity:.34;--blur:.3px">010101101001011010010101</span>
+    <span style="--duration:20s;--delay:-4s;--opacity:.24;--blur:1px">101101001010110010101101</span>
+    <span style="--duration:15s;--delay:-13s;--opacity:.38;--blur:.2px">001010110100101101001011</span>
+    <span style="--duration:17s;--delay:-6s;--opacity:.28;--blur:.8px">110010101101001010110100</span>
+  </div>
+
+  <div class="mist"></div>
+  <div class="shade"></div>
+  <div class="glow"></div>
+</main>
+</body>
+</html>
